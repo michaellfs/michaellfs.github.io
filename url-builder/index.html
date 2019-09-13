@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/skeleton.css">
+        <script>
+            function createUrl() {
+                url = document.getElementById('landingurl').value;
+                medium = document.getElementById('medium').value;
+                source = document.getElementById('source').value;
+                campaign = document.getElementById('campaign').value;
+                product = document.getElementById('product').value;
+                audience = document.getElementById('audience').value;
+                creative = document.getElementById('creative').value;
+
+                gemid1 = "gemid1="+[medium,source,campaign, product, audience, creative].join(':');
+                utmparams = ["utm_medium="+medium, "utm_source="+source, "utm_campaign="+campaign, "utm_product="+product, "utm_audience="+audience, "utm_creative="+creative].join('&');
+
+                document.getElementById('result').innerHTML = [url,"?",gemid1,"&",utmparams].join('');
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+        <h1>LFS - Digital Analytics - URL Builder</h1>
+
+        <div class="row">
+            <div class="five columns">
+        <table >
+            <tr>
+                <td>
+                    Landing Page URL
+                </td>
+                <td>
+                    <input type="text" id="landingurl" value="https://lfs-domain" class="u-full-width" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Medium
+                </td>
+                <td>
+                    <select id="medium" class="u-full-width">
+                        <option>Select...</option>
+                        <option>organic</option>
+                        <option>paid</option>
+                        <option>display</option>
+                        <option>social</option>
+                        <option>email</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Source
+                </td>
+                <td>
+                    <select id="source" class="u-full-width">
+                        <option>Select...</option>
+                        <option>google</option>
+                        <option>yahoo</option>
+                        <option>bing</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Campaign
+                </td>
+                <td>
+                    <input type="text" id="campaign" value="test-campaign" class="u-full-width"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Product
+                </td>
+                <td>
+                    <select id="product" class="u-full-width">
+                        <option>Select...</option>
+                        <option>personal-loans-au</option>
+                        <option>personal-loans-gem</option>
+                        <option>personal-loans-kiwi</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Audience/Segment
+                </td>
+                <td>
+                    <select id="audience" class="u-full-width">
+                        <option>Select...</option>
+                        <option>prospecting</option>
+                        <option>retargeting</option>
+                        <option>awareness</option>
+                        <option>consideration</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Creative
+                </td>
+                <td>
+                    <input type="text" id="creative" value="test-creative" class="u-full-width"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <input type="submit" value="Create URL" onclick="createUrl()" />
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div class="seven columns">
+            <div>Result:</div>
+            <div><textarea id="result"  class="u-full-width" style="height: 200px"></textarea></div>
+        </div>
+    </div>
+    </div>
+    </body>
+</html>
