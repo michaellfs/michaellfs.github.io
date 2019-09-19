@@ -48,8 +48,23 @@
                     resultField.style.visibility = "visible";
                     setTimeout(() => resultField.style.visibility = "hidden", 3000)
                 }
+            }
 
-
+            function mediumChanged() {
+                medium = document.getElementById('medium').value;
+                source = document.getElementById('source');
+                
+                for (var i=1; i<source.options.length; i++) { //skip the Select... option
+                    option = source.options[i];
+                    if (option.dataset && option.dataset.mediumScope && option.dataset.mediumScope.indexOf(medium) > -1) {
+                        option.style.display = "block"
+                    } else {
+                        option.style.display = "none";
+                        if (option.selected) {
+                            source.options[0].selected = true;
+                        }
+                    }
+                }
             }
         </script>
     </head>
@@ -71,13 +86,19 @@
                                 Medium <span style="color: darkred">*</span>
                         </div>
                         <div class="nine columns">
-                            <select id="medium" class="u-full-width">
+                            <select id="medium" class="u-full-width" onchange="mediumChanged()">
                                 <option value="">Select...</option>
                                 <option>organic</option>
                                 <option>paid</option>
                                 <option>display</option>
                                 <option>social</option>
                                 <option>email</option>
+                                <option>broker</option>
+                                <option>affiliate</option>
+                                <option>notification</option>
+                                <option>partner</option>
+                                <option>direct</option>
+                                <option>other</option>
                             </select>
                         </div>
                     </div>
@@ -88,9 +109,54 @@
                         <div class="nine columns">
                             <select id="source" class="u-full-width">
                                 <option value="">Select...</option>
-                                <option>google</option>
-                                <option>yahoo</option>
-                                <option>bing</option>
+                                <option data-medium-scope="organic paid">google</option>
+                                <option data-medium-scope="organic paid">yahoo</option>
+                                <option data-medium-scope="organic paid">bing</option>
+
+                                <option data-medium-scope="display">gdn</option>
+                                <option data-medium-scope="display">quantcast</option>
+                                <option data-medium-scope="display">doubleclick</option>
+                                <option data-medium-scope="display">gmail</option>
+                                <option data-medium-scope="display">youtube</option>
+                                <option data-medium-scope="display">tradedesk</option>
+                                <option data-medium-scope="display">tvnz</option>
+                                <option data-medium-scope="display">nzme</option>
+                                <option data-medium-scope="display">blis</option>
+                                <option data-medium-scope="display">kargo</option>
+                                <option data-medium-scope="display">metservice</option>
+
+                                <option data-medium-scope="social">facebook</option>
+                                <option data-medium-scope="social">twitter</option>
+                                <option data-medium-scope="social">snapchat</option>
+                                <option data-medium-scope="social">instagram</option>
+                                <option data-medium-scope="social">linkedin</option>
+
+                                <option data-medium-scope="email">responsys</option>
+
+                                <option data-medium-scope="broker">broker</option>
+                                
+                                <option data-medium-scope="affiliate">ratecity</option>
+                                <option data-medium-scope="affiliate">finder</option>
+                                <option data-medium-scope="affiliate">canstar</option>
+                                <option data-medium-scope="affiliate"> creditcardcompare</option>
+                                <option data-medium-scope="affiliate">creditcard</option>
+                                <option data-medium-scope="affiliate">creditsimple</option>
+                                <option data-medium-scope="affiliate">mozo</option>
+                                <option data-medium-scope="affiliate">pointhacks</option>
+                                <option data-medium-scope="affiliate">infochoice</option>
+                                <option data-medium-scope="affiliate">comparemarket</option>
+
+                                <option data-medium-scope="notification">sms</option>
+                                <option data-medium-scope="notification">in-app</option>
+                                <option data-medium-scope="notification">push-message</option>
+
+                                <option data-medium-scope="partner">harveynorman</option>
+                                <option data-medium-scope="partner">thegoodguys</option>
+                                <option data-medium-scope="partner">apple</option>
+
+                                <option data-medium-scope="direct">n-a</option>
+
+                                <option data-medium-scope="other">referring-domains</option>
                             </select>
                         </div>
                     </div>
