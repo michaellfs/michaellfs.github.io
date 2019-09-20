@@ -70,22 +70,20 @@
     </head>
     <body>
         <div class="container">
-        <h1>LFS - Digital Analytics - URL Builder</h1>
-        <div class="row">
-            <div class="two columns">
-                Landing Page URL <span style="color: darkred">*</span>
+            <div class="row">
+                <h1>LFS - Digital Analytics - URL Builder</h1>
             </div>
-            <div class="ten columns">
-                <input type="text" id="landingurl" placeholder="https://lfs-domain.com" class="u-full-width" />
+            <div class="row">
+                <div class="ten columns">
+                    <label for="landingurl">Landing Page URL <span style="color: darkred">*</span></label>
+                    <input type="text" id="landingurl" placeholder="https://lfs-domain.com" class="u-full-width" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="five columns">
+            <div class="row">
+                <div class="five columns">
                     <div class="row">
-                        <div class="three columns">
-                                Medium <span style="color: darkred">*</span>
-                        </div>
                         <div class="nine columns">
+                            <label for="medium">Medium</label>
                             <select id="medium" class="u-full-width" onchange="mediumChanged()">
                                 <option value="">Select...</option>
                                 <option>organic</option>
@@ -103,10 +101,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            Source <span style="color: darkred">*</span>
-                        </div>
                         <div class="nine columns">
+                            <label for="source">Source <span style="color: darkred">*</span></label>
                             <select id="source" class="u-full-width">
                                 <option value="">Select...</option>
                                 <option data-medium-scope="organic paid">google</option>
@@ -161,18 +157,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            Campaign <span style="color: darkred">*</span>
-                        </div>
                         <div class="nine columns">
+                            <label for="campaign">Campaign <span style="color: darkred">*</span></label>
                             <input type="text" id="campaign" placeholder="test-campaign" class="u-full-width" maxlength="20" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            Product <span style="color: darkred">*</span>
-                        </div>
                         <div class="nine columns">
+                            <label for="product">Product <span style="color: darkred">*</span></label>
                             <select id="product" class="u-full-width">
                                 <option value="">Select...</option>
                                 <option>personal-loans-au</option>
@@ -182,10 +174,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            Audience <span style="color: darkred">*</span>
-                        </div>
                         <div class="nine columns">
+                            <label for="audience">Audience <span style="color: darkred">*</span></label>
                             <select id="audience" class="u-full-width">
                                 <option value="">Select...</option>
                                 <option>prospecting</option>
@@ -196,32 +186,25 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns" >
-                            Creative <span style="color: darkred" >*</span>
-                        </div>
                         <div class="nine columns" >
+                            <label for="creative">Creative <span style="color: darkred">*</span></label>
                             <input type="text" id="creative" placeholder="test-creative" class="u-full-width" maxlength="20" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            Context
-                        </div>
                         <div class="nine columns">
+                            <label for="context">Context</label>
                             <input type="text" id="context" placeholder="test-context" class="u-full-width" maxlength="20" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="three columns">
-                            
-                        </div>
                         <div class="nine columns">
                             <input type="submit" value="Create URL" onclick="createUrl()" />
                         </div>
                     </div>
                 </div>
                 <div class="five columns" id="resultDiv" style="display: none;">
-                    <div>Result:</div>
+                    <label for="result">Result</label>
                     <div>
                         <textarea id="result"  class="u-full-width" style="height: 200px"></textarea>
                         <div class="u-pull-right">
@@ -233,6 +216,5 @@
             </div>
             
         </div>
-    </div>
     </body>
 </html>
