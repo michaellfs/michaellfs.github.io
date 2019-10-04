@@ -1,221 +1,316 @@
 <html>
-    <head>
-        <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
-        <link rel="stylesheet" href="../css/normalize.css">
-        <link rel="stylesheet" href="../css/skeleton.css">
-        <script>
-            function createUrl() {
-                formValid = true;
-                ["landingurl","medium","source","campaign","product","audience","creative"].forEach(name => {
-                    document.getElementById(name).style.borderColor = "";
-                    val = document.getElementById(name).value;
-                    if (!val) {
-                        document.getElementById(name).style.borderColor = "red";
-                        formValid = false;
-                    }
-                    document.getElementById(name).onchange = hideResultDiv;
-                });
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/skeleton.css" />
+    <script>
+      function createUrl() {
+        formValid = true;
+        [
+          "landingurl",
+          "medium",
+          "source",
+          "campaign",
+          "product",
+          "audience",
+          "creative"
+        ].forEach(name => {
+          document.getElementById(name).style.borderColor = "";
+          val = document.getElementById(name).value;
+          if (!val) {
+            document.getElementById(name).style.borderColor = "red";
+            formValid = false;
+          }
+          document.getElementById(name).onchange = hideResultDiv;
+        });
 
-                if (formValid) {
-                    url = document.getElementById('landingurl').value;
-                    medium = document.getElementById('medium').value;
-                    source = document.getElementById('source').value;
-                    campaign = document.getElementById('campaign').value.replace(/ /g, "-");
-                    product = document.getElementById('product').value;
-                    audience = document.getElementById('audience').value;
-                    creative = document.getElementById('creative').value.replace(/ /g, "-");
-                    context = document.getElementById('context').value.replace(/ /g, "-");
+        if (formValid) {
+          url = document.getElementById("landingurl").value;
+          medium = document.getElementById("medium").value;
+          source = document.getElementById("source").value;
+          campaign = document
+            .getElementById("campaign")
+            .value.replace(/ /g, "-");
+          product = document.getElementById("product").value;
+          audience = document.getElementById("audience").value;
+          creative = document
+            .getElementById("creative")
+            .value.replace(/ /g, "-");
+          context = document.getElementById("context").value.replace(/ /g, "-");
 
-                    gemid1 = "gemid1="+[medium,source,campaign,product,audience,creative].join(':');
-                    utmparams = ["utm_medium="+medium, "utm_source="+source, "utm_campaign="+campaign, "utm_product="+product, "utm_audience="+audience, "utm_creative="+creative].join('&');
-                    if (context) {
-                        gemid1+=":"+context;
-                        utmparams+="&utm_content="+context
-                    }
-                    document.getElementById('result').innerHTML = [url,"?",gemid1,"&",utmparams].join('');
-                    document.getElementById('resultDiv').style.display = "block";
-                }
-                return false;
+          gemid1 =
+            "gemid1=" +
+            [medium, source, campaign, product, audience, creative].join(":");
+          utmparams = [
+            "utm_medium=" + medium,
+            "utm_source=" + source,
+            "utm_campaign=" + campaign,
+            "utm_product=" + product,
+            "utm_audience=" + audience,
+            "utm_creative=" + creative
+          ].join("&");
+          if (context) {
+            gemid1 += ":" + context;
+            utmparams += "&utm_content=" + context;
+          }
+          document.getElementById("result").innerHTML = [
+            url,
+            "?",
+            gemid1,
+            "&",
+            utmparams
+          ].join("");
+          document.getElementById("resultDiv").style.display = "block";
+        }
+        return false;
+      }
+
+      function hideResultDiv() {
+        document.getElementById("resultDiv").style.display = "none";
+      }
+      function copyURL() {
+        resultField = document.querySelector("#copyResult");
+        var copyText = document.querySelector("#result");
+        copyText.select();
+        if (document.execCommand("copy")) {
+          resultField.style.visibility = "visible";
+          setTimeout(() => (resultField.style.visibility = "hidden"), 3000);
+        }
+      }
+
+      function mediumChanged() {
+        medium = document.getElementById("medium").value;
+        source = document.getElementById("source");
+
+        for (var i = 1; i < source.options.length; i++) {
+          //skip the Select... option
+          option = source.options[i];
+          if (
+            option.dataset &&
+            option.dataset.mediumScope &&
+            option.dataset.mediumScope.indexOf(medium) > -1
+          ) {
+            option.style.display = "block";
+          } else {
+            option.style.display = "none";
+            if (option.selected) {
+              source.options[0].selected = true;
             }
-
-            function hideResultDiv() {
-                document.getElementById('resultDiv').style.display = "none";
-            }
-            function copyURL() {
-                resultField = document.querySelector("#copyResult");
-                var copyText = document.querySelector("#result");
-                copyText.select();
-                if (document.execCommand("copy")) {
-                    resultField.style.visibility = "visible";
-                    setTimeout(() => resultField.style.visibility = "hidden", 3000)
-                }
-            }
-
-            function mediumChanged() {
-                medium = document.getElementById('medium').value;
-                source = document.getElementById('source');
-                
-                for (var i=1; i<source.options.length; i++) { //skip the Select... option
-                    option = source.options[i];
-                    if (option.dataset && option.dataset.mediumScope && option.dataset.mediumScope.indexOf(medium) > -1) {
-                        option.style.display = "block"
-                    } else {
-                        option.style.display = "none";
-                        if (option.selected) {
-                            source.options[0].selected = true;
-                        }
-                    }
-                }
-            }
-        </script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <h1>LFS - Digital Analytics - URL Builder</h1>
-            </div>
-            <div class="row">
-                <div class="ten columns">
-                    <label for="landingurl">Landing Page URL <span style="color: darkred">*</span></label>
-                    <input type="text" id="landingurl" placeholder="https://lfs-domain.com" class="u-full-width" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="five columns">
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="medium">Medium</label>
-                            <select id="medium" class="u-full-width" onchange="mediumChanged()">
-                                <option value="">Select...</option>
-                                <option>organic</option>
-                                <option>paid</option>
-                                <option>display</option>
-                                <option>social</option>
-                                <option>email</option>
-                                <option>broker</option>
-                                <option>affiliate</option>
-                                <option>notification</option>
-                                <option>partner</option>
-                                <option>direct</option>
-                                <option>other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="source">Source <span style="color: darkred">*</span></label>
-                            <select id="source" class="u-full-width">
-                                <option value="">Select...</option>
-                                <option data-medium-scope="organic paid">google</option>
-                                <option data-medium-scope="organic paid">yahoo</option>
-                                <option data-medium-scope="organic paid">bing</option>
-
-                                <option data-medium-scope="display">gdn</option>
-                                <option data-medium-scope="display">quantcast</option>
-                                <option data-medium-scope="display">doubleclick</option>
-                                <option data-medium-scope="display">gmail</option>
-                                <option data-medium-scope="display">youtube</option>
-                                <option data-medium-scope="display">tradedesk</option>
-                                <option data-medium-scope="display">tvnz</option>
-                                <option data-medium-scope="display">nzme</option>
-                                <option data-medium-scope="display">blis</option>
-                                <option data-medium-scope="display">kargo</option>
-                                <option data-medium-scope="display">metservice</option>
-
-                                <option data-medium-scope="social">facebook</option>
-                                <option data-medium-scope="social">twitter</option>
-                                <option data-medium-scope="social">snapchat</option>
-                                <option data-medium-scope="social">instagram</option>
-                                <option data-medium-scope="social">linkedin</option>
-
-                                <option data-medium-scope="email">responsys</option>
-
-                                <option data-medium-scope="broker">broker</option>
-                                
-                                <option data-medium-scope="affiliate">ratecity</option>
-                                <option data-medium-scope="affiliate">finder</option>
-                                <option data-medium-scope="affiliate">canstar</option>
-                                <option data-medium-scope="affiliate"> creditcardcompare</option>
-                                <option data-medium-scope="affiliate">creditcard</option>
-                                <option data-medium-scope="affiliate">creditsimple</option>
-                                <option data-medium-scope="affiliate">mozo</option>
-                                <option data-medium-scope="affiliate">pointhacks</option>
-                                <option data-medium-scope="affiliate">infochoice</option>
-                                <option data-medium-scope="affiliate">comparemarket</option>
-
-                                <option data-medium-scope="notification">sms</option>
-                                <option data-medium-scope="notification">in-app</option>
-                                <option data-medium-scope="notification">push-message</option>
-
-                                <option data-medium-scope="partner">harveynorman</option>
-                                <option data-medium-scope="partner">thegoodguys</option>
-                                <option data-medium-scope="partner">apple</option>
-
-                                <option data-medium-scope="direct">n-a</option>
-
-                                <option data-medium-scope="other">referring-domains</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="campaign">Campaign <span style="color: darkred">*</span></label>
-                            <input type="text" id="campaign" placeholder="test-campaign" class="u-full-width" maxlength="20" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="product">Product <span style="color: darkred">*</span></label>
-                            <select id="product" class="u-full-width">
-                                <option value="">Select...</option>
-                                <option>personal-loans-au</option>
-                                <option>personal-loans-gem</option>
-                                <option>personal-loans-kiwi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="audience">Audience <span style="color: darkred">*</span></label>
-                            <select id="audience" class="u-full-width">
-                                <option value="">Select...</option>
-                                <option>prospecting</option>
-                                <option>retargeting</option>
-                                <option>awareness</option>
-                                <option>consideration</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns" >
-                            <label for="creative">Creative <span style="color: darkred">*</span></label>
-                            <input type="text" id="creative" placeholder="test-creative" class="u-full-width" maxlength="20" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <label for="context">Context</label>
-                            <input type="text" id="context" placeholder="test-context" class="u-full-width" maxlength="20" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nine columns">
-                            <input type="submit" value="Create URL" onclick="createUrl()" />
-                        </div>
-                    </div>
-                </div>
-                <div class="five columns" id="resultDiv" style="display: none;">
-                    <label for="result">Result</label>
-                    <div>
-                        <textarea id="result"  class="u-full-width" style="height: 200px"></textarea>
-                        <div class="u-pull-right">
-                            <input type="button" value="Copy URL to clipboard" onclick="copyURL()" />
-                            <span id="copyResult" style="visibility: hidden">&#9989; URL copied!</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>LFS - Digital Analytics - URL Builder</h1>
+      </div>
+      <div class="row">
+        <div class="ten columns">
+          <label for="landingurl"
+            >Landing Page URL <span style="color: darkred">*</span></label
+          >
+          <input
+            type="text"
+            id="landingurl"
+            placeholder="https://lfs-domain.com"
+            class="u-full-width"
+          />
         </div>
-    </body>
+      </div>
+      <div class="row">
+        <div class="five columns">
+          <div class="row">
+            <div class="nine columns">
+              <label for="medium">Medium</label>
+              <select
+                id="medium"
+                class="u-full-width"
+                onchange="mediumChanged()"
+              >
+                <option value="">Select...</option>
+                <option>organic</option>
+                <option>paid</option>
+                <option>display</option>
+                <option>social</option>
+                <option>email</option>
+                <option>broker</option>
+                <option>affiliate</option>
+                <option>notification</option>
+                <option>partner</option>
+                <option>direct</option>
+                <option>other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="source"
+                >Source <span style="color: darkred">*</span></label
+              >
+              <select id="source" class="u-full-width">
+                <option value="">Select...</option>
+                <option data-medium-scope="organic paid">google</option>
+                <option data-medium-scope="organic paid">yahoo</option>
+                <option data-medium-scope="organic paid">bing</option>
+
+                <option data-medium-scope="display">gdn</option>
+                <option data-medium-scope="display">quantcast</option>
+                <option data-medium-scope="display">doubleclick</option>
+                <option data-medium-scope="display">gmail</option>
+                <option data-medium-scope="display">youtube</option>
+                <option data-medium-scope="display">tradedesk</option>
+                <option data-medium-scope="display">tvnz</option>
+                <option data-medium-scope="display">nzme</option>
+                <option data-medium-scope="display">blis</option>
+                <option data-medium-scope="display">kargo</option>
+                <option data-medium-scope="display">metservice</option>
+
+                <option data-medium-scope="social">facebook</option>
+                <option data-medium-scope="social">twitter</option>
+                <option data-medium-scope="social">snapchat</option>
+                <option data-medium-scope="social">instagram</option>
+                <option data-medium-scope="social">linkedin</option>
+
+                <option data-medium-scope="email">responsys</option>
+
+                <option data-medium-scope="broker">broker</option>
+
+                <option data-medium-scope="affiliate">ratecity</option>
+                <option data-medium-scope="affiliate">finder</option>
+                <option data-medium-scope="affiliate">canstar</option>
+                <option data-medium-scope="affiliate">
+                  creditcardcompare</option
+                >
+                <option data-medium-scope="affiliate">creditcard</option>
+                <option data-medium-scope="affiliate">creditsimple</option>
+                <option data-medium-scope="affiliate">mozo</option>
+                <option data-medium-scope="affiliate">pointhacks</option>
+                <option data-medium-scope="affiliate">infochoice</option>
+                <option data-medium-scope="affiliate">comparemarket</option>
+
+                <option data-medium-scope="notification">sms</option>
+                <option data-medium-scope="notification">in-app</option>
+                <option data-medium-scope="notification">push-message</option>
+
+                <option data-medium-scope="partner">harveynorman</option>
+                <option data-medium-scope="partner">thegoodguys</option>
+                <option data-medium-scope="partner">apple</option>
+
+                <option data-medium-scope="direct">n-a</option>
+
+                <option data-medium-scope="other">referring-domains</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="campaign"
+                >Campaign <span style="color: darkred">*</span></label
+              >
+              <input
+                type="text"
+                id="campaign"
+                placeholder="test-campaign"
+                class="u-full-width"
+                maxlength="20"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="product"
+                >Product <span style="color: darkred">*</span></label
+              >
+              <select id="product" class="u-full-width">
+                <option value="">Select...</option>
+                <option>personal-loans-au</option>
+                <option>personal-loans-nz</option>
+                <option>personal-loans-kiwi</option>
+                <option>motor-loans</option>
+                <option>gem-visa-au</option>
+                <option>gem-visa-nz</option>
+                <option>gem-credit-line</option>
+                <option>infinity-rewards</option>
+                <option>28-degrees</option>
+                <option>low-rate-mastercard</option>
+                <option>go-mastercard</option>
+                <option>genoapay-nz</option>
+                <option>latitude-pay</option>
+                <option>latitude-money</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="audience"
+                >Audience <span style="color: darkred">*</span></label
+              >
+              <select id="audience" class="u-full-width">
+                <option value="">Select...</option>
+                <option>prospecting</option>
+                <option>retargeting</option>
+                <option>awareness</option>
+                <option>consideration</option>
+                <option>relevance</option>
+                <option>acquisition</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="creative"
+                >Creative <span style="color: darkred">*</span></label
+              >
+              <input
+                type="text"
+                id="creative"
+                placeholder="test-creative"
+                class="u-full-width"
+                maxlength="20"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="context">Context</label>
+              <input
+                type="text"
+                id="context"
+                placeholder="test-context"
+                class="u-full-width"
+                maxlength="20"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <input type="submit" value="Create URL" onclick="createUrl()" />
+            </div>
+          </div>
+        </div>
+        <div class="five columns" id="resultDiv" style="display: none;">
+          <label for="result">Result</label>
+          <div>
+            <textarea
+              id="result"
+              class="u-full-width"
+              style="height: 200px"
+            ></textarea>
+            <div class="u-pull-right">
+              <input
+                type="button"
+                value="Copy URL to clipboard"
+                onclick="copyURL()"
+              />
+              <span id="copyResult" style="visibility: hidden"
+                >&#9989; URL copied!</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
