@@ -30,13 +30,18 @@
           source = document.getElementById("source").value;
           campaign = document
             .getElementById("campaign")
-            .value.replace(/ /g, "-");
+            .value.replace(/ /g, "-")
+            .toLowerCase();
           product = document.getElementById("product").value;
           audience = document.getElementById("audience").value;
           creative = document
             .getElementById("creative")
-            .value.replace(/ /g, "-");
-          context = document.getElementById("context").value.replace(/ /g, "-");
+            .value.replace(/ /g, "-")
+            .toLowerCase();
+          context = document
+            .getElementById("context")
+            .value.replace(/ /g, "-")
+            .toLowerCase();
 
           gemid1 =
             "gemid1=" +
@@ -304,9 +309,9 @@
                 value="Copy URL to clipboard"
                 onclick="copyURL()"
               />
-              <span id="copyResult" style="visibility: hidden"
-                >&#9989; URL copied!</span
-              >
+              <span id="copyResult" style="visibility: hidden">
+                &#9989; URL copied!
+              </span>
             </div>
           </div>
         </div>
