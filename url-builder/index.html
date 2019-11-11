@@ -21,7 +21,10 @@
             document.getElementById(name).style.borderColor = "red";
             formValid = false;
           }
-          document.getElementById(name).onchange = hideResultDiv;
+
+          document
+            .getElementById(name)
+            .addEventListener("change", hideResultDiv);
         });
 
         if (formValid) {
@@ -135,17 +138,14 @@
                 onchange="mediumChanged()"
               >
                 <option value="">Select...</option>
-                <option>organic</option>
-                <option>paid</option>
-                <option>display</option>
-                <option>social</option>
-                <option>email</option>
+                <option value="-sem-">paid</option>
+                <option value="-dis-">display</option>
+                <option value="-soc-">social</option>
+                <option value="-edm-">email</option>
                 <option>broker</option>
-                <option>affiliate</option>
-                <option>notification</option>
-                <option>partner</option>
-                <option>direct</option>
-                <option>other</option>
+                <option value="-aff-">affiliate</option>
+                <option value="-not-">notification</option>
+                <option value="-par-">partner</option>
               </select>
             </div>
           </div>
@@ -156,56 +156,50 @@
               >
               <select id="source" class="u-full-width">
                 <option value="">Select...</option>
-                <option data-medium-scope="organic paid">google</option>
-                <option data-medium-scope="organic paid">yahoo</option>
-                <option data-medium-scope="organic paid">bing</option>
+                <option data-medium-scope="-sem-">google</option>
+                <option data-medium-scope="-sem-">yahoo</option>
+                <option data-medium-scope="-sem-">bing</option>
 
-                <option data-medium-scope="display">gdn</option>
-                <option data-medium-scope="display">quantcast</option>
-                <option data-medium-scope="display">doubleclick</option>
-                <option data-medium-scope="display">gmail</option>
-                <option data-medium-scope="display">youtube</option>
-                <option data-medium-scope="display">tradedesk</option>
-                <option data-medium-scope="display">tvnz</option>
-                <option data-medium-scope="display">nzme</option>
-                <option data-medium-scope="display">blis</option>
-                <option data-medium-scope="display">kargo</option>
-                <option data-medium-scope="display">metservice</option>
+                <option data-medium-scope="-dis-">gdn</option>
+                <option data-medium-scope="-dis-">quantcast</option>
+                <option data-medium-scope="-dis-">doubleclick</option>
+                <option data-medium-scope="-dis-">gmail</option>
+                <option data-medium-scope="-dis-">youtube</option>
+                <option data-medium-scope="-dis-">tradedesk</option>
+                <option data-medium-scope="-dis-">tvnz</option>
+                <option data-medium-scope="-dis-">nzme</option>
+                <option data-medium-scope="-dis-">blis</option>
+                <option data-medium-scope="-dis-">kargo</option>
+                <option data-medium-scope="-dis-">metservice</option>
 
-                <option data-medium-scope="social">facebook</option>
-                <option data-medium-scope="social">twitter</option>
-                <option data-medium-scope="social">snapchat</option>
-                <option data-medium-scope="social">instagram</option>
-                <option data-medium-scope="social">linkedin</option>
+                <option data-medium-scope="-soc-">facebook</option>
+                <option data-medium-scope="-soc-">twitter</option>
+                <option data-medium-scope="-soc-">snapchat</option>
+                <option data-medium-scope="-soc-">instagram</option>
+                <option data-medium-scope="-soc-">linkedin</option>
 
-                <option data-medium-scope="email">responsys</option>
+                <option data-medium-scope="-edm-">responsys</option>
 
                 <option data-medium-scope="broker">broker</option>
 
-                <option data-medium-scope="affiliate">ratecity</option>
-                <option data-medium-scope="affiliate">finder</option>
-                <option data-medium-scope="affiliate">canstar</option>
-                <option data-medium-scope="affiliate">
-                  creditcardcompare</option
-                >
-                <option data-medium-scope="affiliate">creditcard</option>
-                <option data-medium-scope="affiliate">creditsimple</option>
-                <option data-medium-scope="affiliate">mozo</option>
-                <option data-medium-scope="affiliate">pointhacks</option>
-                <option data-medium-scope="affiliate">infochoice</option>
-                <option data-medium-scope="affiliate">comparemarket</option>
+                <option data-medium-scope="-aff-">ratecity</option>
+                <option data-medium-scope="-aff-">finder</option>
+                <option data-medium-scope="-aff-">canstar</option>
+                <option data-medium-scope="-aff-"> creditcardcompare</option>
+                <option data-medium-scope="-aff-">creditcard</option>
+                <option data-medium-scope="-aff-">creditsimple</option>
+                <option data-medium-scope="-aff-">mozo</option>
+                <option data-medium-scope="-aff-">pointhacks</option>
+                <option data-medium-scope="-aff-">infochoice</option>
+                <option data-medium-scope="-aff-">comparemarket</option>
 
-                <option data-medium-scope="notification">sms</option>
-                <option data-medium-scope="notification">in-app</option>
-                <option data-medium-scope="notification">push-message</option>
+                <option data-medium-scope="-not-">sms</option>
+                <option data-medium-scope="-not-">in-app</option>
+                <option data-medium-scope="-not-">push-message</option>
 
-                <option data-medium-scope="partner">harveynorman</option>
-                <option data-medium-scope="partner">thegoodguys</option>
-                <option data-medium-scope="partner">apple</option>
-
-                <option data-medium-scope="direct">n-a</option>
-
-                <option data-medium-scope="other">referring-domains</option>
+                <option data-medium-scope="-par-">harveynorman</option>
+                <option data-medium-scope="-par-">thegoodguys</option>
+                <option data-medium-scope="-par-">apple</option>
               </select>
             </div>
           </div>
