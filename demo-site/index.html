@@ -78,6 +78,12 @@
     </script>
     <!-- End Datalayer script -->
 
+    <!-- Configures Tealium to _not_ send out the default initial call -->
+    <script type="text/javascript">
+      window.utag_cfg_ovrd = window.utag_cfg_ovrd || {};
+      window.utag_cfg_ovrd.noview = true;
+    </script>
+
     <!-- Tealium Body script (utag.js) can load up asynchronously, as shown. 
     The environment can be "dev", "qa" or "prod". We are loading up "qa" here. -->
     <script type="text/javascript">
@@ -94,6 +100,19 @@
       })();
     </script>
 
+    <!-- Once the datalayer is ready, we trigger utag.view(). The utag.js file is loaded 
+      asynchonrously, so we need to check if utag is available before calling utag.view().
+    -->
+    <script type="text/javascript">
+      function queueTealium() {
+        if (window.utag) {
+          utag.view(flattenData(digitalData))
+        } else {
+          setTimeout(queueTealium, 100);
+        }
+      }
+    </script>
+
     <div class="container">
       <div class="row">
         <div class="one-half column" style="margin-top: 25%">
@@ -103,20 +122,20 @@
             LFS-approved implementation. Right-click and "View Page Source" for details.
           </p>
 
-          <p>In the console:
+          <p>In the console, try typing:
             <ul>
               <li>
-                Type <code>digitalData</code> to print the datalayer of this page. Visit 
+                <code>digitalData</code> to print the datalayer of this page. Visit 
                 <a href="https://di.latitudefinancial.com/wiki/display/DIG/1.+Analytics+Data+Layer+Schema">Analytics Datalayer Schema</a>
                 to see all (optional) elements.
               </li>
               <li>
-                Type <code>utag.view()</code> to trigger a page-load call in Tealium. These are used on page-load, 
+                <code>utag.view(flattenData(digitalData))</code> to trigger a page-load call in Tealium. These are used on page-load, 
                 for both real (static sites) and virtual (E.g. Single Page Applications - SPAs). 
               </li>
               <li>
-                Type <code>utag.link(flattenData({event: {category: "lightbox", action: "click", label: 
-                "more info", location: "footer"}}))</code> to trigger a link call in Tealium. These are 
+                <code>utag.link(flattenData({...digitalData, event: {category: "lightbox", action: "click", label: "more info", 
+                location: "footer"}}))</code> to trigger a link call in Tealium. These are 
                 typically used to track events that are not page-loads. Examples include some button 
                 clicks, lightboxes, and similar interactions. Visit the
                 <a href="https://di.latitudefinancial.com/wiki/display/DIG/Rules+for+datalayer+eventObject+consistency">Event Object</a> 
