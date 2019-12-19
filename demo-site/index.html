@@ -16,19 +16,9 @@
     <script src="https://tags.tiqcdn.com/utag/latitudefs/main/qa/utag.sync.js"></script>
     <!-- End Tealium Head script -->
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:400,300,600"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://michaellfs.github.io/css/normalize.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://michaellfs.github.io/css/skeleton.css"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://michaellfs.github.io/css/normalize.css" />
+    <link rel="stylesheet" href="https://michaellfs.github.io/css/skeleton.css" />
   </head>
   <body>
     <!-- 
@@ -38,16 +28,17 @@
     <script type="text/javascript">
       var digitalData = {
         page: {
-          pagetype: "information-page",
+          pageType: "information-page",
           site: "demo-site",
-          sitecountry: "au",
-          sitesection: "home",
-          sitesubsection: "",
-          pagetitle: "demo-home-page"
+          siteCountry: "au",
+          siteSection: "home",
+          siteSubSection: "",
+          pageTitle: "demo-home-page"
         },
         product: { productId: ["DEMO001"] }
       };
 
+      //Helper function for flattening the (Latitude Web Analytics-specified) digitalData object into the Tealium-preferred object:
       function flattenData(data, prefix, result) {
         prefix = prefix || "";
         result = result || {};
@@ -62,19 +53,6 @@
         }
         return result;
       }
-
-      var utag_data = flattenData(digitalData);
-      /* This converts the Latitude-specific nested object (digitalData) into the Tealium-specific flat object (utag_data) similar to the following
-        var utag_data = {
-            page_pagetype: "information-page",
-            page_site: "demo-site",
-            page_sitecountry: "au",
-            page_sitesection: "home",
-            page_sitesubsection: "",
-            page_pagetitle: "demo-home-page",
-            product_productid: ["DEMO001"]
-        };
-      */
     </script>
     <!-- End Datalayer script -->
 
@@ -106,7 +84,7 @@
     <script type="text/javascript">
       function queueTealium() {
         if (window.utag) {
-          utag.view(flattenData(digitalData))
+          utag.view(flattenData(digitalData));
         } else {
           setTimeout(queueTealium, 100);
         }
@@ -116,7 +94,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="one-half column" style="margin-top: 25%">
+        <div class="three-quarters column" style="margin-top: 25%">
           <h4>LFS Tealium - Getting Started</h4>
           <p>
             This is the demo homepage, showing an example of the minimum
@@ -126,13 +104,20 @@
           <p>In the console, try typing:
             <ul>
               <li>
-                <code>digitalData</code> to print the datalayer of this page. Visit 
+                <code>digitalData</code> to return the Latitude-specified datalayer of this page. Visit 
                 <a href="https://di.latitudefinancial.com/wiki/display/DIG/1.+Analytics+Data+Layer+Schema">Analytics Datalayer Schema</a>
                 to see all (optional) elements.
               </li>
               <li>
+                <code>flattenData(digitalData)</code> to return the same datalayer in the Tealium-preferred style
+              </li>
+              <li>
                 <code>utag.view(flattenData(digitalData))</code> to trigger a page-load call in Tealium. These are used on page-load, 
                 for both real (static sites) and virtual (E.g. Single Page Applications - SPAs). 
+              </li>
+              <li>
+                <code>{...digitalData, event: {category: "lightbox", action: "click", label: "more info", 
+                location: "footer"}}</code> to view the datalayer of this page, with an example event object merged into it
               </li>
               <li>
                 <code>utag.link(flattenData({...digitalData, event: {category: "lightbox", action: "click", label: "more info", 
