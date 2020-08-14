@@ -13,8 +13,8 @@
           "campaign",
           "product",
           "audience",
-          "creative"
-        ].forEach(name => {
+          "creative",
+        ].forEach((name) => {
           document.getElementById(name).style.borderColor = "";
           val = document.getElementById(name).value;
           if (!val) {
@@ -55,7 +55,7 @@
             "utm_campaign=" + campaign,
             "utm_product=" + product,
             "utm_audience=" + audience,
-            "utm_creative=" + creative
+            "utm_creative=" + creative,
           ].join("&");
           if (context) {
             gemid1 += ":" + context;
@@ -66,7 +66,7 @@
             "?",
             gemid1,
             "&",
-            utmparams
+            utmparams,
           ].join("");
           document.getElementById("resultDiv").style.display = "block";
         }
@@ -116,9 +116,9 @@
       </div>
       <div class="row">
         <div class="ten columns">
-          <label for="landingurl"
-            >Landing Page URL <span style="color: darkred">*</span></label
-          >
+          <label for="landingurl">
+            Landing Page URL <span style="color: darkred;">*</span>
+          </label>
           <input
             type="text"
             id="landingurl"
@@ -152,17 +152,18 @@
           <div class="row">
             <div class="nine columns">
               <label for="source"
-                >Source <span style="color: darkred">*</span></label
+                >Source <span style="color: darkred;">*</span></label
               >
               <select id="source" class="u-full-width">
                 <option value="">Select...</option>
                 <option data-medium-scope="-sem-">google</option>
                 <option data-medium-scope="-sem-">yahoo</option>
                 <option data-medium-scope="-sem-">bing</option>
+                <option data-medium-scope="-sem-">baidu</option>
+                <option data-medium-scope="-sem-">ask</option>
 
                 <option data-medium-scope="-dis-">gdn</option>
-                <option data-medium-scope="-dis-">quantcast</option>
-                <option data-medium-scope="-dis-">doubleclick</option>
+                <option data-medium-scope="-dis-">dv360</option>
                 <option data-medium-scope="-dis-">gmail</option>
                 <option data-medium-scope="-dis-">youtube</option>
                 <option data-medium-scope="-dis-">tradedesk</option>
@@ -177,15 +178,17 @@
                 <option data-medium-scope="-soc-">snapchat</option>
                 <option data-medium-scope="-soc-">instagram</option>
                 <option data-medium-scope="-soc-">linkedin</option>
+                <option data-medium-scope="-soc-">pinterest</option>
 
                 <option data-medium-scope="-edm-">responsys</option>
+                <option data-medium-scope="-edm-">partner</option>
 
                 <option data-medium-scope="broker">broker</option>
 
                 <option data-medium-scope="-aff-">ratecity</option>
                 <option data-medium-scope="-aff-">finder</option>
                 <option data-medium-scope="-aff-">canstar</option>
-                <option data-medium-scope="-aff-"> creditcardcompare</option>
+                <option data-medium-scope="-aff-">creditcardcompare</option>
                 <option data-medium-scope="-aff-">creditcard</option>
                 <option data-medium-scope="-aff-">creditsimple</option>
                 <option data-medium-scope="-aff-">mozo</option>
@@ -197,16 +200,21 @@
                 <option data-medium-scope="-not-">in-app</option>
                 <option data-medium-scope="-not-">push-message</option>
 
+                <option data-medium-scope="-par-">societyone</option>
+                <option data-medium-scope="-par-">ratesetter</option>
                 <option data-medium-scope="-par-">harveynorman</option>
                 <option data-medium-scope="-par-">thegoodguys</option>
                 <option data-medium-scope="-par-">apple</option>
+                <option data-medium-scope="-par-">catch</option>
+                <option data-medium-scope="-par-">cottonon</option>
+                <option data-medium-scope="-par-">reece</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="nine columns">
               <label for="campaign"
-                >Campaign <span style="color: darkred">*</span></label
+                >Campaign <span style="color: darkred;">*</span></label
               >
               <input
                 type="text"
@@ -220,47 +228,42 @@
           <div class="row">
             <div class="nine columns">
               <label for="product"
-                >Product <span style="color: darkred">*</span></label
+                >Product <span style="color: darkred;">*</span></label
               >
               <select id="product" class="u-full-width">
                 <option value="">Select...</option>
-                <option>personal-loans-au</option>
-                <option>personal-loans-nz</option>
+                <option>personal-loans</option>
                 <option>personal-loans-kiwi</option>
-                <option>motor-loans</option>
-                <option>gem-visa-au</option>
-                <option>gem-visa-nz</option>
+                <option>motorloans</option>
+                <option>gemvisa</option>
                 <option>gem-credit-line</option>
                 <option>infinity-rewards</option>
-                <option>28-degrees</option>
+                <option>28degrees</option>
                 <option>low-rate-mastercard</option>
-                <option>go-mastercard</option>
-                <option>genoapay-nz</option>
-                <option>latitude-pay</option>
-                <option>latitude-money</option>
+                <option>gomastercard</option>
+                <option>genoapay</option>
+                <option selected>latitudepay</option>
+                <option>latitudemoney</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="nine columns">
               <label for="audience"
-                >Audience <span style="color: darkred">*</span></label
+                >Audience <span style="color: darkred;">*</span></label
               >
               <select id="audience" class="u-full-width">
                 <option value="">Select...</option>
-                <option>prospecting</option>
-                <option>retargeting</option>
                 <option>awareness</option>
                 <option>consideration</option>
-                <option>relevance</option>
-                <option>acquisition</option>
+                <option>conversion</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="nine columns">
               <label for="creative"
-                >Creative <span style="color: darkred">*</span></label
+                >Creative <span style="color: darkred;">*</span></label
               >
               <input
                 type="text"
@@ -295,7 +298,7 @@
             <textarea
               id="result"
               class="u-full-width"
-              style="height: 200px"
+              style="height: 200px;"
             ></textarea>
             <div class="u-pull-right">
               <input
@@ -303,7 +306,7 @@
                 value="Copy URL to clipboard"
                 onclick="copyURL()"
               />
-              <span id="copyResult" style="visibility: hidden">
+              <span id="copyResult" style="visibility: hidden;">
                 &#9989; URL copied!
               </span>
             </div>
