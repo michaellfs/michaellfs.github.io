@@ -7,7 +7,8 @@
       function createUrl() {
         formValid = true;
         [
-          "landingurl",
+          "domain",
+          "path",
           "medium",
           "source",
           "campaign",
@@ -28,7 +29,8 @@
         });
 
         if (formValid) {
-          url = document.getElementById("landingurl").value;
+          domain = document.getElementById("domain").value;
+          path = document.getElementById("path").value;
           medium = document.getElementById("medium").value;
           source = document.getElementById("source").value;
           campaign = document
@@ -41,10 +43,6 @@
             .getElementById("creative")
             .value.replace(/ /g, "-")
             .toLowerCase();
-          context = document
-            .getElementById("context")
-            .value.replace(/ /g, "-")
-            .toLowerCase();
 
           gemid1 =
             "gemid1=" +
@@ -53,16 +51,12 @@
             "utm_medium=" + medium,
             "utm_source=" + source,
             "utm_campaign=" + campaign,
-            "utm_product=" + product,
-            "utm_audience=" + audience,
-            "utm_creative=" + creative,
+            "utm_content=" + product + ":" + audience + ":" + creative,
           ].join("&");
-          if (context) {
-            gemid1 += ":" + context;
-            utmparams += "&utm_content=" + context;
-          }
           document.getElementById("result").innerHTML = [
-            url,
+            "https://",
+            domain,
+            path,
             "?",
             gemid1,
             "&",
@@ -115,15 +109,33 @@
         <h1>LFS - Digital Analytics - URL Builder</h1>
       </div>
       <div class="row">
-        <div class="ten columns">
-          <label for="landingurl">
-            Landing Page URL <span style="color: darkred;">*</span>
+        <div class="four columns">
+          <label for="domain">
+            Landing Page Domain<span style="color: darkred;">*</span>
+          </label>
+          <select id="domain" class="u-full-width">
+            <option value="">Select...</option>
+            <option>app.latitudepay.com</option>
+            <option>www.28degreescard.com.au</option>
+            <option>www.buyersedge.com.au</option>
+            <option>www.gemfinance.co.nz</option>
+            <option>www.gemvisa.com.au</option>
+            <option>www.gomastercard.com.au</option>
+            <option>www.interestfree.com.au</option>
+            <option>www.latitudefinancial.com.au</option>
+            <option selected>www.latitudepay.com</option>
+          </select>
+        </div>
+        <div class="six columns">
+          <label for="path">
+            Path <span style="color: darkred;">*</span>
           </label>
           <input
             type="text"
-            id="landingurl"
+            id="path"
             placeholder="https://lfs-domain.com"
             class="u-full-width"
+            value="/"
           />
         </div>
       </div>
@@ -271,18 +283,6 @@
                 type="text"
                 id="creative"
                 placeholder="test-creative"
-                class="u-full-width"
-                maxlength="20"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="nine columns">
-              <label for="context">Context</label>
-              <input
-                type="text"
-                id="context"
-                placeholder="test-context"
                 class="u-full-width"
                 maxlength="20"
               />
