@@ -83,6 +83,7 @@
       function mediumChanged() {
         medium = document.getElementById("medium").value;
         source = document.getElementById("source");
+        source.options[0].disabled = true;
 
         for (var i = 1; i < source.options.length; i++) {
           //skip the Select... option
