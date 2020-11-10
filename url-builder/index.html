@@ -111,7 +111,7 @@
       <div class="row">
         <div class="four columns">
           <label for="domain">
-            Landing Page Domain <span style="color: darkred;">*</span>
+            Landing Page Domain <span style="color: darkred">*</span>
           </label>
           <select id="domain" class="u-full-width">
             <option value="">Select...</option>
@@ -127,9 +127,7 @@
           </select>
         </div>
         <div class="six columns">
-          <label for="path">
-            Path <span style="color: darkred;">*</span>
-          </label>
+          <label for="path"> Path <span style="color: darkred">*</span> </label>
           <input
             type="text"
             id="path"
@@ -144,7 +142,7 @@
           <div class="row">
             <div class="nine columns">
               <label for="medium">
-                Medium <span style="color: darkred;">*</span>
+                Medium <span style="color: darkred">*</span>
               </label>
               <select
                 id="medium"
@@ -160,13 +158,14 @@
                 <option value="-aff-">affiliate</option>
                 <option value="-not-">notification</option>
                 <option value="-par-">partner</option>
+                <option value="-vid-">video</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="nine columns">
               <label for="source">
-                Source <span style="color: darkred;">*</span>
+                Source <span style="color: darkred">*</span>
               </label>
               <select id="source" class="u-full-width">
                 <option value="">Select...</option>
@@ -222,13 +221,19 @@
                 <option data-medium-scope="-par-">catch</option>
                 <option data-medium-scope="-par-">cottonon</option>
                 <option data-medium-scope="-par-">reece</option>
+                <option data-medium-scope="-par-">jbhifi</option>
+
+                <option data-medium-scope="-vid-">fb</option>
+                <option data-medium-scope="-vid-">youtube</option>
+                <option data-medium-scope="-vid-">bvod</option>
+                <option data-medium-scope="-vid-">other</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="nine columns">
               <label for="campaign">
-                Campaign <span style="color: darkred;">*</span>
+                Campaign <span style="color: darkred">*</span>
               </label>
               <input
                 type="text"
@@ -242,7 +247,7 @@
           <div class="row">
             <div class="nine columns">
               <label for="product">
-                Product <span style="color: darkred;">*</span>
+                Product <span style="color: darkred">*</span>
               </label>
               <select id="product" class="u-full-width">
                 <option value="">Select...</option>
@@ -264,7 +269,7 @@
           <div class="row">
             <div class="nine columns">
               <label for="audience">
-                Audience <span style="color: darkred;">*</span>
+                Audience <span style="color: darkred">*</span>
               </label>
               <select id="audience" class="u-full-width">
                 <option value="">Select...</option>
@@ -277,7 +282,7 @@
           <div class="row">
             <div class="nine columns">
               <label for="creative">
-                Creative <span style="color: darkred;">*</span>
+                Creative <span style="color: darkred">*</span>
               </label>
               <input
                 type="text"
@@ -294,13 +299,13 @@
             </div>
           </div>
         </div>
-        <div class="five columns" id="resultDiv" style="display: none;">
+        <div class="five columns" id="resultDiv" style="display: none">
           <label for="result">Result</label>
           <div>
             <textarea
               id="result"
               class="u-full-width"
-              style="height: 200px;"
+              style="height: 200px"
             ></textarea>
             <div class="u-pull-right">
               <input
@@ -308,7 +313,7 @@
                 value="Copy URL to clipboard"
                 onclick="copyURL()"
               />
-              <span id="copyResult" style="visibility: hidden;">
+              <span id="copyResult" style="visibility: hidden">
                 &#9989; URL copied!
               </span>
             </div>
