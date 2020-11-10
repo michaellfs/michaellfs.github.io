@@ -93,8 +93,10 @@
             option.dataset.mediumScope.indexOf(medium) > -1
           ) {
             option.style.display = "block";
+            option.disabled = false;
           } else {
             option.style.display = "none";
+            option.disabled = true;
             if (option.selected) {
               source.options[0].selected = true;
             }
@@ -107,6 +109,7 @@
     <div class="container">
       <div class="row">
         <h1>LFS - Digital Analytics - URL Builder</h1>
+        <p>Optimised for Chrome</p>
       </div>
       <div class="row">
         <div class="four columns">
