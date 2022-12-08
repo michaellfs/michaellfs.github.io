@@ -15,10 +15,12 @@
           "product",
           "audience",
           "creative",
+          "source_code",
         ].forEach((name) => {
           document.getElementById(name).style.borderColor = "";
           val = document.getElementById(name).value;
-          if (!val) {
+          classes = document.getElementById(name).className;
+          if (!val && !/optional/.test(classes)) {
             document.getElementById(name).style.borderColor = "red";
             formValid = false;
           }
@@ -43,6 +45,7 @@
             .getElementById("creative")
             .value.replace(/ /g, "-")
             .toLowerCase();
+          source_code = document.getElementById("source_code").value;
 
           gemid1 =
             "gemid1=" +
@@ -53,6 +56,7 @@
             "utm_campaign=" + campaign,
             "utm_content=" + product + ":" + audience + ":" + creative,
           ].join("&");
+          source_code = source_code ? "&source_code=" + source_code : "";
           document.getElementById("result").innerHTML = [
             "https://",
             domain,
@@ -61,6 +65,7 @@
             gemid1,
             "&",
             utmparams,
+            source_code,
           ].join("");
           document.getElementById("resultDiv").style.display = "block";
         }
@@ -295,6 +300,24 @@
                 class="u-full-width"
                 maxlength="20"
               />
+            </div>
+          </div>
+          <div class="row">
+            <div class="nine columns">
+              <label for="source_code"> Source Code </label>
+              <select id="source_code" class="u-full-width optional">
+                <option value="">Select... (optional)</option>
+                <option>3011</option>
+                <option>3012</option>
+                <option>3013</option>
+                <option>3014</option>
+                <option>3015</option>
+                <option>3016</option>
+                <option>3017</option>
+                <option>3018</option>
+                <option>3019</option>
+                <option>3020</option>
+              </select>
             </div>
           </div>
           <div class="row">
