@@ -36,6 +36,9 @@
           if (!val && !/optional/.test(classes)) {
             document.getElementById(name).style.borderColor = "red";
             formValid = false;
+            gtag("event", "createUrl", {
+              formValid: "false",
+            });
           }
 
           document
@@ -70,7 +73,7 @@
             "utm_content=" + product + ":" + audience + ":" + creative,
           ].join("&");
           source_code = source_code ? "&source_code=" + source_code : "";
-          document.getElementById("result").innerHTML = [
+          let newURL = [
             "https://",
             domain,
             path,
@@ -80,7 +83,15 @@
             utmparams,
             source_code,
           ].join("");
+          document.getElementById("result").innerHTML = newURL;
           document.getElementById("resultDiv").style.display = "block";
+
+          gtag("event", "createUrl", {
+            formValid: "true",
+          });
+          gtag("event", "newUrl", {
+            newURL: newURL,
+          });
         }
         return false;
       }
